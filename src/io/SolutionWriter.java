@@ -1,5 +1,6 @@
 package io;
 
+import entities.SnakeSolution;
 import entities.SolutionInstance;
 
 import java.io.File;
@@ -14,9 +15,9 @@ public class SolutionWriter {
 
         try {
             PrintWriter printWriter = new PrintWriter(new FileWriter(file, false));
-
-            // TODO: Beam me up, Scotty
-
+            for (SnakeSolution snakeSolution : solution.solutions) {
+                printWriter.println(snakeSolution.toString());
+            }
             printWriter.flush();
             printWriter.close();
         } catch (IOException e) {
