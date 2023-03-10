@@ -16,9 +16,10 @@ public class ProblemReader {
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
 
-            String[] firstLine = br.readLine().strip().split(" ");
+            String[] firstLine = br.readLine().split(" ");
             List<Integer> snakes = new ArrayList<Integer>();
-            for (String s : br.readLine().strip().split(" ")) {
+            String[] secondLine =  br.readLine().split(" ");
+            for (String s : secondLine) {
                 snakes.add(Integer.valueOf(s));
             }
             //Feld
@@ -26,7 +27,7 @@ public class ProblemReader {
             int rows = Integer.valueOf(firstLine[1]);
 
 
-            String[][] matrix = new String[columns][rows];
+            String[][] matrix = new String[rows][columns];
             String nextLine = br.readLine();
             int colCounter = 0;
 

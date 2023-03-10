@@ -14,12 +14,10 @@ public class MainClass {
     public static final String PROBLEM_05 = "../problem/05-input-opposite-points-holes";
 
     public static void main(String[] args) {
-        System.out.println("Test");
-
+        System.out.println("LETS FUCKING GO");
         ProblemInstance problem = new ProblemReader().readerFile(PROBLEM_EXAMPLE+".txt");
         ISolver solver = new LongestPathSolver();
         SolutionWriter solutionWriter = new SolutionWriter();
         solutionWriter.writeSolution(solver.solve(problem),PROBLEM_EXAMPLE+"_solution.txt");
-
     }
 }
