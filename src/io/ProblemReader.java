@@ -36,6 +36,7 @@ public class ProblemReader {
                 colCounter++;
                 nextLine = br.readLine();
             }
+
             ProblemInstance instance = new ProblemInstance(rows, columns, matrix, snakes);
             System.out.println(instance);
             return instance;
