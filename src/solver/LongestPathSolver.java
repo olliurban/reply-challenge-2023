@@ -17,6 +17,7 @@ public class LongestPathSolver implements ISolver {
 
         Grid grid = new Grid(problem.grid, problem.rows, problem.columns);
         solution.grid = problem.grid;
+
         int totalValue = 0;
         for (Integer snake : problem.snakes) {
             SnakeSolution snakeSolution = new SnakeSolution();
@@ -42,13 +43,27 @@ public class LongestPathSolver implements ISolver {
             }
 
 
-            System.out.println("Value: " + solutionValue + " length: " + snake + " row: " + bestSolution.get(0).row + " col: " + bestSolution.get(0).col);
             totalValue = totalValue + solutionValue;
             if (bestSolution != null) {
+                System.out.println("Snake Length: " + snake + " Value: " + solutionValue + " length: " + snake + " row: " + bestSolution.get(0).row + " col: " + bestSolution.get(0).col);
                 for (Grid.Field field : bestSolution) {
                     grid.fields[field.row][field.col].isVisited = true;
                     field.isVisited = true;
+
+                    while (bestSolution.size() != snake) {
+                        int leftPathLength = snake - bestSolution.size();
+                        int pathLength = leftPathLength < 5 ? leftPathLength : 5;
+                        grid.getLongestPath(bestSolution.get(bestSolution.size() - 1), bestSolution, bestSolution.size() + pathLength);
+                        bestSolution = grid.bestPath;
+                        grid.bestPath.forEach(solField-> {
+                            grid.fields[solField.row][solField.col].isVisited = true;
+                            solField.isVisited = true;
+                        });
+                    }
+
                 }
+                solution.solutions.add(bestSolution);
+                System.out.println("SolutionSize:"+bestSolution.size());
                 grid.bestPath = new ArrayList<>();
             }
         }
@@ -56,4 +71,6 @@ public class LongestPathSolver implements ISolver {
         System.out.println("TotalValue: " + totalValue);
         return solution;
     }
+
+
 }

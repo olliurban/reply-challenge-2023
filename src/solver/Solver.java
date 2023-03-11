@@ -60,7 +60,7 @@ public class Solver implements ISolver {
 
                 }
             }*/
-            solution.solutions.add(snakeSolution);
+
         });
 
 
