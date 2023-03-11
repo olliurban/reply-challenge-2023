@@ -17,11 +17,8 @@ public class SolutionWriter {
 
         try {
             PrintWriter printWriter = new PrintWriter(new FileWriter(file, false));
-
-
             for (List<Grid.Field> solList : solution.solutions) {
                 String solutionString = solList.get(0).col + " " + solList.get(0).row;
-                System.out.println(solList.size());
                 for (int i = 1; i < solList.size(); i++) {
                     int preCol = solList.get(i - 1).col;
                     int preRow = solList.get(i - 1).row;

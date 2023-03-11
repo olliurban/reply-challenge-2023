@@ -15,9 +15,9 @@ public class MainClass {
 
     public static void main(String[] args) {
         System.out.println("LETS FUCKING GO");
-        ProblemInstance problem = new ProblemReader().readerFile(PROBLEM_EXAMPLE+".txt");
+        ProblemInstance problem = new ProblemReader().readerFile(PROBLEM_02+".txt");
         ISolver solver = new LongestPathSolver();
         SolutionWriter solutionWriter = new SolutionWriter();
-        solutionWriter.writeSolution(solver.solve(problem),PROBLEM_EXAMPLE+"_solution.txt");
+        solutionWriter.writeSolution(solver.solve(problem),PROBLEM_02+"_solution.txt");
     }
 }

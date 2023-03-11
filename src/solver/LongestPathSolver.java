@@ -43,25 +43,38 @@ public class LongestPathSolver implements ISolver {
             }
 
 
-            totalValue = totalValue + solutionValue;
+
             if (bestSolution != null) {
                 System.out.println("Snake Length: " + snake + " Value: " + solutionValue + " length: " + snake + " row: " + bestSolution.get(0).row + " col: " + bestSolution.get(0).col);
                 for (Grid.Field field : bestSolution) {
                     grid.fields[field.row][field.col].isVisited = true;
                     field.isVisited = true;
-
+                    int pathConst = 5;
+                    int lastSize = bestSolution.size();
                     while (bestSolution.size() != snake) {
                         int leftPathLength = snake - bestSolution.size();
-                        int pathLength = leftPathLength < 5 ? leftPathLength : 5;
+                        int pathLength = leftPathLength < pathConst ? leftPathLength : pathConst;
+
                         grid.getLongestPath(bestSolution.get(bestSolution.size() - 1), bestSolution, bestSolution.size() + pathLength);
                         bestSolution = grid.bestPath;
+                        int newSize = bestSolution.size();
+                        //If no way is possible go a step back
+                        if(newSize == lastSize) {
+                            bestSolution.remove(bestSolution.size()-1);
+                        } else {
+                            lastSize = newSize;
+                        }
                         grid.bestPath.forEach(solField-> {
                             grid.fields[solField.row][solField.col].isVisited = true;
                             solField.isVisited = true;
                         });
+                        if(bestSolution.size() > snake) {
+                            pathConst = pathConst -1;
+                        }
                     }
 
                 }
+                totalValue = totalValue + grid.getTotalValue(grid.bestPath);;
                 solution.solutions.add(bestSolution);
                 System.out.println("SolutionSize:"+bestSolution.size());
                 grid.bestPath = new ArrayList<>();
